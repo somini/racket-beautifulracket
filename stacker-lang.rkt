@@ -21,6 +21,18 @@
   #'(#%module-begin
      reader-line ...))
 
+#| Bindings |#
+(define stack empty) #| The stack |#
+(define (push num) (set! stack (cons num stack)))
+#| The all-mighty "dispatch" function |#
+(define (dispatch arg-1 [arg-2 #f])
+  (cond
+    [(number? arg-2) (push arg-2)]
+    [else
+      (define op arg-1)
+      (define op-result (op (first stack) (second stack)))
+      (set! stack (cons op-result (drop stack 2)))]))
+
 #| Public Functions |#
 (provide read-syntax) #| The reader |#
 (provide (rename-out [stacker-module-begin #%module-begin])) #| The expander |#
