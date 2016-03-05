@@ -19,14 +19,17 @@
 #| The expander |#
 (define #'(stacker-module-begin reader-line ...)
   #'(#%module-begin
-     reader-line ...))
+     reader-line ...
+     (display (first stack))
+     (display "\n")))
 
 #| Bindings |#
 (define stack empty) #| The stack |#
 (define (push num) (set! stack (cons num stack)))
 #| The all-mighty "dispatch" function |#
-(define (dispatch arg-1 [arg-2 #f])
+(define (dispatch [arg-1 #f] [arg-2 #f])
   (cond
+    [(eq? arg-1 #f) (void)] #| Skip invocations with no arguments (shebang)|#
     [(number? arg-2) (push arg-2)]
     [else
       (define op arg-1)
@@ -34,5 +37,6 @@
       (set! stack (cons op-result (drop stack 2)))]))
 
 #| Public Functions |#
+(provide #%top-interaction) #| DrRacket support |#
 (provide read-syntax) #| The reader |#
 (provide (rename-out [stacker-module-begin #%module-begin])) #| The expander |#
