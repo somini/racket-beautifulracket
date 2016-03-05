@@ -10,8 +10,9 @@
   #| src-exprs now contains a list of target expressions |#
 
   #| Inject those expressions into the module "stacker-reader" |#
+  #| Using this file as expander |#
   (inject-syntax ([#'(src-expr ...) src-exprs])
-                 #'(module stacker-reader br
+                 #'(module stacker-reader "stacker-lang.rkt"
                      src-expr ...))
   )
 #| Public Functions |#
