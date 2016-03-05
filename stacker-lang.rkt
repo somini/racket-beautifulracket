@@ -19,8 +19,7 @@
 #| The expander |#
 (define #'(stacker-module-begin reader-line ...)
   #'(#%module-begin
-     (define studio (* 6 9))
-     (displayln studio)))
+     reader-line ...))
 
 #| Public Functions |#
 (provide read-syntax) #| The reader |#
