@@ -17,11 +17,11 @@
                      src-expr ...))
   )
 #| The expander |#
-(define #'(#%module-begin reader-line ...)
+(define #'(stacker-module-begin reader-line ...)
   #'(#%module-begin
      (define studio (* 6 9))
      (displayln studio)))
 
 #| Public Functions |#
 (provide read-syntax) #| The reader |#
-(provide #%module-begin) #| The expander |#
+(provide (rename-out [stacker-module-begin #%module-begin])) #| The expander |#
