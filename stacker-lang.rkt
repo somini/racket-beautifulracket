@@ -1,5 +1,6 @@
 #!/usr/bin/env racket
 #lang br
+#| The reader |#
 (define (read-syntax src-path src-port)
   #| Read the whole port[file] as a string list |#
   (define src-strs (port->lines src-port))
@@ -15,5 +16,12 @@
                  #'(module stacker-reader "stacker-lang.rkt"
                      src-expr ...))
   )
+#| The expander |#
+(define #'(#%module-begin reader-line ...)
+  #'(#%module-begin
+     (define studio (* 6 9))
+     (displayln studio)))
+
 #| Public Functions |#
-(provide read-syntax)
+(provide read-syntax) #| The reader |#
+(provide #%module-begin) #| The expander |#
